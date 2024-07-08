@@ -28,10 +28,6 @@ const productSchema = new Schema<ProductProps>(
       type: Number,
       default: 0,
     },
-    featured: {
-      type: Boolean,
-      default: false,
-    },
   },
   {
     timestamps: true,

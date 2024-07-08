@@ -6,5 +6,4 @@ export interface ProductProps {
   category: string;
   ratings?: number;
   images?: string[];
-  featured?: boolean;
 }
