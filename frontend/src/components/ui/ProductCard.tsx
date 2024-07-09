@@ -1,21 +1,45 @@
-const ProductCard = () => {
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+
+interface ProductCardProps {
+  title?: string;
+  description?: string;
+  price?: number;
+  quantity?: number;
+  imageUrl?: string;
+}
+
+const ProductCard = ({
+  title = "Camping tent",
+  description = "Product description goes here.",
+  price = 20,
+  quantity = 200,
+  imageUrl,
+}: ProductCardProps) => {
   return (
-    <div className="mx-auto mt-11 w-80 transform overflow-hidden shadow-md rounded-lg duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="mx-auto mt-11 w-80 transform overflow-hidden shadow-md rounded-lg duration-300 hover:scale-100 hover:shadow-lg">
       <img
         className="h-56 w-full object-cover object-center"
-        src="https://images.unsplash.com/photo-1508873696983-2dfd5898f08b?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        src={imageUrl}
         alt="Product Image"
       />
       <div className="px-6 py-4">
-        <h2 className="mb-2 text-2xl font-medium">Camping tent</h2>
-        <p className="mb-2 text-gray-700">Product description goes here.</p>
+        <h2 className="mb-3 text-2xl font-medium">{title}</h2>
+        <p className="mb-2 text-gray-700">{description}</p>
         <div className="flex items-center">
-          <p className="mr-2 text-lg font-semibol">$20.00</p>
+          <p className="mr-2 text-md font-semibol">Stock: {quantity}</p>
           {/* <p className="text-base  font-medium text-gray-500 line-through dark:text-gray-300">
             $25.00
           </p> */}
-          <p className="ml-auto text-base font-medium text-green-500">$20.00</p>
+          <p className="ml-auto text-lg font-medium text-green-500">${price}</p>
         </div>
+
+        <button className="w-full mt-5 mb-1 flex justify-center items-center bg-primary text-white font-medium py-2 px-4 rounded hover:bg-primary-600">
+          <ShoppingCartIcon
+            aria-hidden="true"
+            className="w-5 mr-2 flex-none text-white"
+          />
+          Buy Now
+        </button>
       </div>
     </div>
   );
