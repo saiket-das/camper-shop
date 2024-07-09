@@ -20,9 +20,27 @@ const getAllProductsService = async () => {
 
 // Get a product by ID
 const getSingleProductService = async (id: string) => {
-  const result = await ProductModel.findById({ _id: id });
+  const result = await ProductModel.findByIdAndUpdate({ _id: id });
   if (!result) {
     throw new AppError(httpStatus.BAD_REQUEST, "Product not foundd!");
+  }
+  return result;
+};
+
+// Update a product's detail by ID
+const updateProductService = async (
+  payload: Partial<ProductProps>,
+  id: string
+) => {
+  const result = await ProductModel.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  });
+  if (!result) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Fail to update product's detail!"
+    );
   }
   return result;
 };
@@ -40,5 +58,6 @@ export const ProductServices = {
   createProductService,
   getAllProductsService,
   getSingleProductService,
+  updateProductService,
   deleteProductService,
 };

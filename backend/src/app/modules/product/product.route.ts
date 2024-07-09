@@ -18,6 +18,13 @@ router.get("/", ProductControllers.getAllProducts);
 // Get a product by ID
 router.get("/:id", ProductControllers.getSingleProduct);
 
+// Update a product's detail by ID
+router.put(
+  "/:id",
+  validateRequest(ProductValidations.updateProductSchema),
+  ProductControllers.updateProduct
+);
+
 // Delete a product by ID
 router.delete("/:id", ProductControllers.deleteProduct);
 

@@ -15,6 +15,19 @@ const createProductSchema = z.object({
   }),
 });
 
+const updateProductSchema = z.object({
+  body: z.object({
+    name: z.string().optional(),
+    price: z.number().positive().optional(),
+    stock: z.number().int().nonnegative().optional(),
+    description: z.string().optional().optional(),
+    category: z.string().optional(),
+    images: z.array(z.string().url()).optional(),
+    ratings: z.number().min(0).max(5).optional(),
+  }),
+});
+
 export const ProductValidations = {
   createProductSchema,
+  updateProductSchema,
 };
