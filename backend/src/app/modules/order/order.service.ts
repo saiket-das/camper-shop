@@ -61,6 +61,26 @@ const createOrderService = async (payload: OrderProps) => {
   }
 };
 
+// Get all order
+const getAllOrdersService = async (id: string) => {
+  const result = await OrderModel.find();
+  if (result.length < 1) {
+    throw new AppError(httpStatus.BAD_REQUEST, "No order found!");
+  }
+  return result;
+};
+
+// Delete a order
+const deleteOrderService = async (id: string) => {
+  const result = await OrderModel.deleteOne({ _id: id });
+  if (result.deletedCount < 1) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Fail to delete order!");
+  }
+  return result;
+};
+
 export const OrderServices = {
   createOrderService,
+  getAllOrdersService,
+  deleteOrderService,
 };
