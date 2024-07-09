@@ -1,4 +1,4 @@
-export type ErrorSourcesProps = {
+export type ErrorPathProps = {
   path: string | number;
   message: string;
 }[];
@@ -6,5 +6,5 @@ export type ErrorSourcesProps = {
 export type GenericErrorResponseProps = {
   statusCode: number;
   message: string;
-  errorPath: ErrorSourcesProps;
+  errorPath: ErrorPathProps;
 };
