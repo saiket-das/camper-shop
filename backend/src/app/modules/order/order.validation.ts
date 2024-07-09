@@ -15,3 +15,7 @@ const orderSchema = z.object({
     orderStatus: z.nativeEnum(OrderStatus),
   }),
 });
+
+export const OrderValidatons = {
+  orderSchema,
+};

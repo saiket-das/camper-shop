@@ -1,3 +1,5 @@
+import { Types } from "mongoose";
+
 export interface ProductProps {
   name: string;
   price: number;
@@ -6,4 +8,5 @@ export interface ProductProps {
   category: string;
   ratings?: number;
   images?: string[];
+  _id: Types.ObjectId;
 }
