@@ -1,5 +1,7 @@
+import httpStatus from "http-status";
 import { ProductProps } from "./product.interface";
 import { ProductModel } from "./product.model";
+import AppError from "../../errors/AppError";
 
 // Create a new product
 const createProductService = async (payload: ProductProps) => {
@@ -10,12 +12,18 @@ const createProductService = async (payload: ProductProps) => {
 // Create a new product
 const getAllProductsService = async () => {
   const result = await ProductModel.find();
+  if (result.length < 1) {
+    throw new AppError(httpStatus.NOT_FOUND, "Product not found!");
+  }
   return result;
 };
 
 // Get a product by ID
 const getSingleProductService = async (id: string) => {
   const result = await ProductModel.findById({ _id: id });
+  if (!result) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Product not foundd!");
+  }
   return result;
 };
 
@@ -23,7 +31,7 @@ const getSingleProductService = async (id: string) => {
 const deleteProductService = async (id: string) => {
   const result = await ProductModel.deleteOne({ _id: id });
   if (result.deletedCount < 1) {
-    console.log("Failed to delete");
+    throw new AppError(httpStatus.BAD_REQUEST, "Fail to delete product!");
   }
   return result;
 };
