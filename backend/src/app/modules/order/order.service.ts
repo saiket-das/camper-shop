@@ -2,8 +2,9 @@ import httpStatus from "http-status";
 import AppError from "../../errors/AppError";
 import { ProductModel } from "../product/product.model";
 import { OrderProps } from "./order.interface";
-import { OrderModel } from "./order.mode";
+
 import { ProductProps } from "../product/product.interface";
+import { OrderModel } from "./order.model";
 
 // Create a new order
 const createOrderService = async (payload: OrderProps) => {

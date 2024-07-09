@@ -6,6 +6,7 @@ import { OrderControllers } from "./order.controller";
 const router = Router();
 
 // Create a new order
+
 router.post(
   "/",
   validateRequest(OrderValidatons.orderSchema),
