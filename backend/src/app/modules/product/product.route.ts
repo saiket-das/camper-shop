@@ -15,4 +15,10 @@ router.post(
 // Get all products
 router.get("/", ProductControllers.getAllProducts);
 
+// Get a product by ID
+router.get("/:id", ProductControllers.getSingleProduct);
+
+// Delete a product by ID
+router.delete("/:id", ProductControllers.deleteProduct);
+
 export const ProductRoutes = router;
