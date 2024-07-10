@@ -154,7 +154,7 @@ const ProductDetails = () => {
               ৳{product?.data.price}
             </p>
             <p className="text-md mt-2 tracking-tight text-gray-900">
-              Stock: 200
+              Stock: {product?.data.stock}
             </p>
 
             {/* Reviews */}

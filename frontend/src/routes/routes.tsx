@@ -7,6 +7,7 @@ import Home from "../pages/Home/Home";
 import MainLayout from "../components/layout/MainLayout";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import NotFound from "../pages/NotFound/NotFound";
+import Dashbaord from "../pages/Dashboard/Dashbaord";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: AppRoutes.DASHBOARD,
-        element: <AboutUs />,
+        element: <Dashbaord />,
       },
       {
         path: AppRoutes.CART,
