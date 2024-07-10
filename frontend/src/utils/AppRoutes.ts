@@ -2,7 +2,7 @@ const AppRoutes = {
   HOME: "/",
   ABOUT_US: "/about-us",
   PRODUCTS: "/products",
-  PRODUCT_DETAILS: (productId = ":productId") => `/products/${productId}`,
+  PRODUCT_DETAILS: (id = ":id") => `/products/${id}`,
   CART: "/cart",
   DASHBOARD: "/dashboard",
   CHECKOUT: "/checkout",

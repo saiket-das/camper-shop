@@ -9,6 +9,7 @@ const productApi = baseApi.injectEndpoints({
       }),
     }),
   }),
+  overrideExisting: false, // To avoid overwriting existing endpoints
 });
 
-// export const {use}= productApi
+export const { useGetAllProductsQuery } = productApi;

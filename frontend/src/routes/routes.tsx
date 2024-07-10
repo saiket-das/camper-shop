@@ -5,6 +5,7 @@ import Cart from "../pages/Cart/Cart";
 import AppRoutes from "../utils/AppRoutes";
 import Home from "../pages/Home/Home";
 import MainLayout from "../components/layout/MainLayout";
+import ProductDetails from "../pages/ProductDeatils/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: AppRoutes.PRODUCTS,
         element: <Products />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails />,
       },
 
       {
