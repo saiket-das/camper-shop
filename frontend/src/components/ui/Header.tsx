@@ -6,6 +6,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
 import { ApppAssets } from "../../utils/AppAssets";
+import { Link } from "react-router-dom";
+import AppRoutes from "../../utils/AppRoutes";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,9 +19,9 @@ const Header = () => {
         className="mx-auto flex max-w-7xl items-center justify-between pb-10"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
-            <img alt="" src={ApppAssets.logo} className="h-12 w-auto" />
-          </a>
+          <Link to={AppRoutes.HOME} className="-m-1.5 p-1.5">
+            <img alt="logo" src={ApppAssets.LOGO} className="h-12 w-auto" />
+          </Link>
         </div>
         <div className="flex lg:hidden">
           <button
@@ -32,38 +34,42 @@ const Header = () => {
           </button>
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <a
-            href="#"
+          <Link
+            to={AppRoutes.HOME}
             className="text-md font-medium leading-6 text-gray-900 hover:text-primary"
           >
             Home
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to={AppRoutes.PRODUCTS}
             className="text-md font-medium leading-6 text-gray-900 hover:text-primary"
           >
             Products
-          </a>
-          <a
-            href="#"
-            className="text-md font-medium leading-6 text-gray-900 hover:text-primary"
-          >
-            Management
-          </a>
-          <a
-            href="#"
+          </Link>
+
+          <Link
+            to={AppRoutes.ABOUT_US}
             className="text-md font-medium leading-6 text-gray-900 hover:text-primary"
           >
             About us
-          </a>
+          </Link>
+          <Link
+            to={AppRoutes.DASHBOARD}
+            className="text-md font-medium leading-6 text-gray-900 hover:text-primary"
+          >
+            Dashboard
+          </Link>
         </PopoverGroup>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <div className="flex h-12 w-12 flex-none items-center justify-center rounded-full hover:bg-gray-50">
+          <Link
+            to={AppRoutes.CART}
+            className="flex h-12 w-12 flex-none items-center justify-center rounded-full hover:bg-gray-50"
+          >
             <ShoppingCartIcon
               aria-hidden="true"
               className="w-6 flex-none text-primary"
             />
-          </div>
+          </Link>
         </div>
       </nav>
       <Dialog
@@ -74,13 +80,13 @@ const Header = () => {
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            <Link to={AppRoutes.DASHBOARD} className="-m-1.5 p-1.5">
               <img
                 alt=""
                 src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto"
               />
-            </a>
+            </Link>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
@@ -93,38 +99,42 @@ const Header = () => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
-                <a
-                  href="#"
+                <Link
+                  to={AppRoutes.HOME}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:text-primary hover:bg-gray-50"
                 >
                   Home
-                </a>
-                <a
-                  href="#"
+                </Link>
+                <Link
+                  to={AppRoutes.PRODUCTS}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:text-primary hover:bg-gray-50"
                 >
                   Products
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:text-primary hover:bg-gray-50"
-                >
-                  Management
-                </a>
-                <a
-                  href="#"
+                </Link>
+
+                <Link
+                  to={AppRoutes.ABOUT_US}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:text-primary hover:bg-gray-50"
                 >
                   About us
-                </a>
+                </Link>
+                <Link
+                  to={AppRoutes.DASHBOARD}
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:text-primary hover:bg-gray-50"
+                >
+                  Dashboard
+                </Link>
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:text-primary hover:bg-gray-50"
+                <Link
+                  to={AppRoutes.CART}
+                  className="flex h-12 w-12 flex-none items-center justify-center rounded-full hover:bg-gray-50"
                 >
-                  Log in
-                </a>
+                  <ShoppingCartIcon
+                    aria-hidden="true"
+                    className="w-6 flex-none text-primary"
+                  />
+                </Link>
               </div>
             </div>
           </div>

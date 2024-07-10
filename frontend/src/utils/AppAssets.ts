@@ -1,5 +1,5 @@
-import logo from "../assets/images/logo.svg";
+import LOGO from "../assets/images/logo.svg";
 
 export const ApppAssets = {
-  logo,
+  LOGO,
 };
