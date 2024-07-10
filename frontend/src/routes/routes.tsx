@@ -5,7 +5,8 @@ import Cart from "../pages/Cart/Cart";
 import AppRoutes from "../utils/AppRoutes";
 import Home from "../pages/Home/Home";
 import MainLayout from "../components/layout/MainLayout";
-import ProductDetails from "../pages/ProductDeatils/ProductDetails";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
+import NotFound from "../pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+  { path: "*", element: <NotFound /> },
 ]);
 
 export default router;
