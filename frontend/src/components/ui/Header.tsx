@@ -65,10 +65,15 @@ const Header = () => {
             to={AppRoutes.CART}
             className="flex h-12 w-12 flex-none items-center justify-center rounded-full hover:bg-gray-50"
           >
-            <ShoppingCartIcon
-              aria-hidden="true"
-              className="w-6 flex-none text-primary"
-            />
+            <div className="relative inline-flex">
+              <ShoppingCartIcon
+                aria-hidden="true"
+                className="w-6 flex-none text-primary"
+              />
+              <span className="absolute rounded-full py-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[5%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-primary text-white min-w-[20px] min-h-[20px]">
+                5
+              </span>
+            </div>
           </Link>
         </div>
       </nav>
