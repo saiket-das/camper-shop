@@ -2,6 +2,7 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { Link, useParams } from "react-router-dom";
 import AppRoutes from "../../utils/AppRoutes";
 import { useGetSingleProductQuery } from "../../redux/features/product/productApi";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 // const product = {
 //   name: "Basic Tee 6-Pack",
@@ -141,7 +142,7 @@ const ProductDetails = () => {
 
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
-          <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+          <div className="lg:col-span-2 lg:border-r lg:border-gray-300 lg:pr-8">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
               {product?.data.name}
             </h1>
@@ -186,7 +187,7 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
+          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-300 lg:pb-2 lg:pr-8 lg:pt-6">
             {/* Description and details */}
             <div>
               <h3 className="sr-only">Description</h3>
@@ -195,6 +196,24 @@ const ProductDetails = () => {
                 <p className="text-base text-gray-900">
                   {product?.data.description}
                 </p>
+              </div>
+              <div className="flex items-center w-full mx-auto justify-start my-6">
+                <button className="group rounded-l-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
+                  <MinusIcon
+                    aria-hidden="true"
+                    className="w-5 flex-none text-red-500"
+                  />
+                </button>
+
+                <p className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[98px] min-w-[80px] placeholder:text-gray-900 py-[14px] text-center bg-transparent">
+                  2
+                </p>
+                <button className="group rounded-r-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
+                  <PlusIcon
+                    aria-hidden="true"
+                    className="w-5 flex-none text-primary"
+                  />
+                </button>
               </div>
             </div>
           </div>
