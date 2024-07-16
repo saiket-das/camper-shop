@@ -1,18 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-type CartProps = {
+export type CartProps = {
   _id: string;
   quantity: number;
-  price: string;
+  price: number;
   stock: string;
 };
 
-type CartStateProps = {
-  cart: [] | CartProps[];
-};
-
-const initialState: CartStateProps = {
-  cart: [],
+const initialState = {
+  cart: [] as CartProps[],
 };
 
 const cartSlice = createSlice({
@@ -26,7 +22,10 @@ const cartSlice = createSlice({
       );
       if (!selectedProduct) {
         // If product is not in the cart then add product to cart
-        const product = { ...action.payload, quantity: 1 };
+        const product: CartProps = {
+          ...action.payload,
+          quantity: 1,
+        };
         state.cart.push(product);
       } else {
         // If product is already in the cart then increase product's quantity

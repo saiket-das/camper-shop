@@ -4,7 +4,11 @@ import AppRoutes from "../../utils/AppRoutes";
 import { useGetSingleProductQuery } from "../../redux/features/product/productApi";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { addToCart, removeFromCart } from "../../redux/features/cart/cartSlice";
+import {
+  addToCart,
+  CartProps,
+  removeFromCart,
+} from "../../redux/features/cart/cartSlice";
 import { RootState } from "../../redux/store";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
@@ -27,7 +31,7 @@ const ProductDetails = () => {
   }
 
   const addToCartFunc = () => {
-    const cartProduct = {
+    const cartProduct: CartProps = {
       _id: product?.data._id,
       quantity: 1,
       price: product?.data.price,
