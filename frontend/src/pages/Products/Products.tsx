@@ -3,7 +3,18 @@ import { useGetAllProductsQuery } from "../../redux/features/product/productApi"
 import { ProductProps } from "../../types/product.types";
 
 const Products = () => {
-  const { data: product } = useGetAllProductsQuery(undefined);
+  const { data: product, isLoading } = useGetAllProductsQuery(undefined);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (!product) {
+    return (
+      <div className="flex justify-center items-center text-primary-600">
+        Product not found
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">

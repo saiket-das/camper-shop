@@ -8,9 +8,15 @@ import { Dialog, DialogPanel, PopoverGroup } from "@headlessui/react";
 import { ApppAssets } from "../../utils/AppAssets";
 import { Link } from "react-router-dom";
 import AppRoutes from "../../utils/AppRoutes";
+import { useAppSelector } from "../../redux/hooks";
+import { RootState } from "../../redux/store";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const cart = useAppSelector((state: RootState) => state.cart.cart);
+
+  const totalProduct = cart.length;
 
   return (
     <header className="bg-white">
@@ -70,9 +76,11 @@ const Header = () => {
                 aria-hidden="true"
                 className="w-6 flex-none text-primary"
               />
-              <span className="absolute rounded-full py-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[5%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-primary text-white min-w-[20px] min-h-[20px]">
-                5
-              </span>
+              {totalProduct != 0 && (
+                <span className="absolute rounded-full py-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[5%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-primary text-white min-w-[20px] min-h-[20px]">
+                  {totalProduct}
+                </span>
+              )}
             </div>
           </Link>
         </div>

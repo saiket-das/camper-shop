@@ -1,3 +1,4 @@
+// import { ProductProps } from "../../../types/product.types";
 import { baseApi } from "../../api/baseApi";
 
 const productApi = baseApi.injectEndpoints({
@@ -9,6 +10,7 @@ const productApi = baseApi.injectEndpoints({
       }),
     }),
 
+    // <ProductProps[], string>
     getSingleProduct: builder.query({
       query: (id) => ({
         url: `/product/${id}`,

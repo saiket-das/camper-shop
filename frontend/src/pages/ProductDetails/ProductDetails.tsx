@@ -3,71 +3,45 @@ import { Link, useParams } from "react-router-dom";
 import AppRoutes from "../../utils/AppRoutes";
 import { useGetSingleProductQuery } from "../../redux/features/product/productApi";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { addToCart, removeFromCart } from "../../redux/features/cart/cartSlice";
+import { RootState } from "../../redux/store";
 
-// const product = {
-//   name: "Basic Tee 6-Pack",
-//   price: "$192",
-//   href: "#",
-//   breadcrumbs: [
-//     { id: 1, name: "Men", href: "#" },
-//     { id: 2, name: "Clothing", href: "#" },
-//   ],
-//   images: [
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-//       alt: "Two each of gray, white, and black shirts laying flat.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
-//       alt: "Model wearing plain black basic tee.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
-//       alt: "Model wearing plain gray basic tee.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
-//       alt: "Model wearing plain white basic tee.",
-//     },
-//   ],
-//   colors: [
-//     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-//     { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-//     { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-//   ],
-//   sizes: [
-//     { name: "XXS", inStock: false },
-//     { name: "XS", inStock: true },
-//     { name: "S", inStock: true },
-//     { name: "M", inStock: true },
-//     { name: "L", inStock: true },
-//     { name: "XL", inStock: true },
-//     { name: "2XL", inStock: true },
-//     { name: "3XL", inStock: true },
-//   ],
-//   description:
-//     "The Basic Tee 6-Pack extra pop of color to your outfit? Our white tee has you covered.",
-//   highlights: [
-//     "Hand cut and sewn locally",
-//     "Dyed with our proprietary colors",
-//     "Pre-washed & pre-shrunk",
-//     "Ultra-soft 100% cotton",
-//   ],
-//   details:
-//     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-// };
 const reviews = { href: "#", average: 4, totalCount: 117 };
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const ProductDetails = () => {
+  const dispatch = useAppDispatch();
+
   const { id } = useParams<{ id: string }>();
-
-  // console.log(productId);
-
   const { data: product, isLoading } = useGetSingleProductQuery(id);
+
+  const cart = useAppSelector((state: RootState) => state.cart.cart);
+  let cartProduct;
+  if (product) {
+    cartProduct = cart.find(
+      (cartProduct) => cartProduct._id === product.data._id
+    );
+  }
+
+  const addToCartFunc = () => {
+    const cartProduct = {
+      _id: product?.data._id,
+      quantity: 1,
+      price: product?.data.price,
+      stock: product?.data.stock,
+    };
+    dispatch(addToCart(cartProduct));
+  };
+
+  const removeFromCartFunc = () => {
+    const cartProduct = {
+      _id: product?.data._id,
+    };
+    dispatch(removeFromCart(cartProduct));
+  };
 
   if (isLoading) return <p>Loading...</p>;
 
@@ -198,7 +172,10 @@ const ProductDetails = () => {
                 </p>
               </div>
               <div className="flex items-center w-full mx-auto justify-start my-6">
-                <button className="group rounded-l-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
+                <button
+                  onClick={removeFromCartFunc}
+                  className="group rounded-l-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                >
                   <MinusIcon
                     aria-hidden="true"
                     className="w-5 flex-none text-red-500"
@@ -206,9 +183,12 @@ const ProductDetails = () => {
                 </button>
 
                 <p className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[98px] min-w-[80px] placeholder:text-gray-900 py-[14px] text-center bg-transparent">
-                  2
+                  {cartProduct ? cartProduct.quantity : 0}
                 </p>
-                <button className="group rounded-r-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50">
+                <button
+                  onClick={addToCartFunc}
+                  className="group rounded-r-full px-6 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:shadow-gray-200 hover:border-gray-300 hover:bg-gray-50"
+                >
                   <PlusIcon
                     aria-hidden="true"
                     className="w-5 flex-none text-primary"

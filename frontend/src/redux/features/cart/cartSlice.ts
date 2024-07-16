@@ -1,11 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ProductProps } from "../../../types/product.types";
-
-// type CartProductProps = {
-//     _id: string;
-//     price: string;
-//     stock: string;
-//   };
 
 type CartProps = {
   _id: string;
@@ -27,37 +20,31 @@ const cartSlice = createSlice({
   initialState,
 
   reducers: {
-    addToCart: (state, action: PayloadAction<ProductProps>) => {
+    addToCart: (state, action: PayloadAction<CartProps>) => {
       const selectedProduct = state.cart.find(
         (product) => product._id === action.payload._id
       );
-
       if (!selectedProduct) {
+        // If product is not in the cart then add product to cart
         const product = { ...action.payload, quantity: 1 };
         state.cart.push(product);
       } else {
+        // If product is already in the cart then increase product's quantity
         selectedProduct.quantity += 1;
-        state.cart
-          .filter((product) => product._id !== action.payload._id)
-          .push(selectedProduct);
       }
     },
 
     removeFromCart: (state, action) => {
-      if (action.payload.quantity > 1) {
-        const product = {
-          ...action.payload,
-          quantity: action.payload.quantity - 1,
-        };
-
-        state.cart = state.cart.filter(
-          (product) => product._id !== action.payload._id
-        );
-        state.cart.push(product);
-      } else {
-        state.cart = state.cart.filter(
-          (product) => product._id !== action.payload._id
-        );
+      const { _id } = action.payload;
+      const existingProduct = state.cart.find((product) => product._id === _id);
+      if (existingProduct) {
+        if (existingProduct.quantity > 1) {
+          // Reduce quantity
+          existingProduct.quantity -= 1;
+        } else {
+          // Remove item completely
+          state.cart = state.cart.filter((item) => item._id !== _id);
+        }
       }
     },
   },
