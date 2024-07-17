@@ -4,6 +4,7 @@ import { OrderStatus } from "./order.constant";
 const orderItemSchema = z.object({
   productId: z.string({ required_error: "Product ID is required!" }),
   quantity: z.number().min(1, "Quantity must be at least 1!"),
+  price: z.number().min(1, "Quantity must be at least 1!"),
 });
 
 const userSchema = z.object({

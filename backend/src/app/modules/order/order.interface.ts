@@ -9,6 +9,7 @@ interface UserProps {
 interface OrderItemProps {
   productId: string;
   quantity: number;
+  price: number;
 }
 
 export interface OrderProps {

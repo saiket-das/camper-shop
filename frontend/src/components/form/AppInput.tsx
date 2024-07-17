@@ -3,10 +3,18 @@ import { Controller } from "react-hook-form";
 type AppInputProps = {
   type: string;
   name: string;
+  placeholder: string;
   label?: string;
+  required?: boolean;
 };
 
-const AppInput = ({ type, name, label }: AppInputProps) => {
+const AppInput = ({
+  type,
+  name,
+  label,
+  placeholder,
+  required = true,
+}: AppInputProps) => {
   return (
     <div>
       {label && (
@@ -23,8 +31,10 @@ const AppInput = ({ type, name, label }: AppInputProps) => {
           <input
             {...field}
             id={name}
+            placeholder={placeholder}
             type={type}
-            className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            required={required}
+            className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1  ring-gray-300 focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6"
           />
         )}
       />
