@@ -17,6 +17,7 @@ const CartCard = ({ productId, quantity }: CartProps) => {
 
   const { _id, name, images, price } = product.data;
 
+  // Add to Cart
   const addToCartFunc = () => {
     const cartItem: CartProps = {
       productId: _id,
@@ -26,6 +27,7 @@ const CartCard = ({ productId, quantity }: CartProps) => {
     dispatch(addToCart(cartItem));
   };
 
+  // Remove from Cart
   const removeFromCartFunc = () => {
     const cartItem = {
       productId: _id,
@@ -39,7 +41,7 @@ const CartCard = ({ productId, quantity }: CartProps) => {
         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
           <img
             src={images[0]}
-            alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+            alt={name}
             className="h-full w-full object-cover object-center"
           />
         </div>
