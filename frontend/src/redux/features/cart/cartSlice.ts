@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type CartProps = {
-  _id: string;
+  productId: string;
   quantity: number;
   price: number;
-  stock: string;
-};
+}; // Define an interface for price data
 
 const initialState = {
-  cart: [] as CartProps[],
+  items: [] as CartProps[],
+  totalAmount: 0,
 };
 
 const cartSlice = createSlice({
@@ -17,8 +17,9 @@ const cartSlice = createSlice({
 
   reducers: {
     addToCart: (state, action: PayloadAction<CartProps>) => {
-      const selectedProduct = state.cart.find(
-        (product) => product._id === action.payload._id
+      const { productId, quantity, price } = action.payload; // Destructure payload
+      const selectedProduct = state.items.find(
+        (product) => product.productId === productId
       );
       if (!selectedProduct) {
         // If product is not in the cart then add product to cart
@@ -26,23 +27,31 @@ const cartSlice = createSlice({
           ...action.payload,
           quantity: 1,
         };
-        state.cart.push(product);
+        state.items.push(product);
+        state.totalAmount += quantity * price; // Update total amount
       } else {
         // If product is already in the cart then increase product's quantity
         selectedProduct.quantity += 1;
+        state.totalAmount += price; // Update total amount (for existing items)
       }
     },
 
     removeFromCart: (state, action) => {
-      const { _id } = action.payload;
-      const existingProduct = state.cart.find((product) => product._id === _id);
+      const { productId } = action.payload;
+      const existingProduct = state.items.find(
+        (item) => item.productId === productId
+      );
       if (existingProduct) {
         if (existingProduct.quantity > 1) {
-          // Reduce quantity
-          existingProduct.quantity -= 1;
+          existingProduct.quantity -= 1; // Reduce quantity
+
+          state.totalAmount -= existingProduct.price; // Assuming you have a price property
         } else {
           // Remove item completely
-          state.cart = state.cart.filter((item) => item._id !== _id);
+          state.items = state.items.filter(
+            (item) => item.productId !== productId
+          );
+          state.totalAmount -= existingProduct.price * existingProduct.quantity; // Consider quantity
         }
       }
     },

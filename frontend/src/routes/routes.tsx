@@ -8,6 +8,7 @@ import MainLayout from "../components/layout/MainLayout";
 import ProductDetails from "../pages/ProductDetails/ProductDetails";
 import NotFound from "../pages/NotFound/NotFound";
 import Dashbaord from "../pages/Dashboard/Dashbaord";
+import Checkout from "../pages/Checkout/Checkout";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: AppRoutes.CART,
         element: <Cart />,
+      },
+      {
+        path: AppRoutes.CHECKOUT,
+        element: <Checkout />,
       },
     ],
   },

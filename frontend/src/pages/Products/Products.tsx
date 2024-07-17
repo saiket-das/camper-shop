@@ -6,13 +6,13 @@ const Products = () => {
   const { data: product, isLoading } = useGetAllProductsQuery(undefined);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <p>Loading...</p>;
   }
   if (!product) {
     return (
-      <div className="flex justify-center items-center text-primary-600">
-        Product not found
-      </div>
+      <p className="flex justify-center items-center text-primary-600">
+        There is no product
+      </p>
     );
   }
 

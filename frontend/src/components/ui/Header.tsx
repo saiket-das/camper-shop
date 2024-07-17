@@ -14,7 +14,7 @@ import { RootState } from "../../redux/store";
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const cart = useAppSelector((state: RootState) => state.cart.cart);
+  const cart = useAppSelector((state: RootState) => state.cart.items);
 
   const totalProduct = cart.length;
 

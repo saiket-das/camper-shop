@@ -18,36 +18,34 @@ function classNames(...classes: string[]) {
 
 const ProductDetails = () => {
   const dispatch = useAppDispatch();
-
   const { id } = useParams<{ id: string }>();
   const { data: product, isLoading } = useGetSingleProductQuery(id);
+  const cart = useAppSelector((state: RootState) => state.cart.items);
 
-  const cart = useAppSelector((state: RootState) => state.cart.cart);
-  let cartProduct;
+  if (isLoading) return <p>Loading...</p>;
+
+  const { _id, name, images, description, stock, price } = product.data;
+
+  let cartItem;
   if (product) {
-    cartProduct = cart.find(
-      (cartProduct) => cartProduct._id === product.data._id
-    );
+    cartItem = cart.find((item) => item.productId === _id);
   }
 
   const addToCartFunc = () => {
-    const cartProduct: CartProps = {
-      _id: product?.data._id,
+    const cartItem: CartProps = {
+      productId: _id,
       quantity: 1,
-      price: product?.data.price,
-      stock: product?.data.stock,
+      price,
     };
-    dispatch(addToCart(cartProduct));
+    dispatch(addToCart(cartItem));
   };
 
   const removeFromCartFunc = () => {
     const cartProduct = {
-      _id: product?.data._id,
+      productId: _id,
     };
     dispatch(removeFromCart(cartProduct));
   };
-
-  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="bg-white">
@@ -79,7 +77,7 @@ const ProductDetails = () => {
             </li>
 
             <li className="text-sm font-medium text-gray-500 hover:text-gray-600">
-              {product?.data.name}
+              {name}
             </li>
           </ol>
         </nav>
@@ -88,31 +86,31 @@ const ProductDetails = () => {
         <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
           <div className="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block">
             <img
-              alt={product?.data.images[0].alt}
-              src={product?.data.images[0]}
+              alt={images[0].alt}
+              src={images[0]}
               className="h-full w-full object-cover object-center"
             />
           </div>
           <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                alt={product?.data.images[1].alt}
-                src={product?.data.images[1]}
+                alt={images[1].alt}
+                src={images[1]}
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
               <img
-                alt={product?.data.images[2].alt}
-                src={product?.data.images[2]}
+                alt={images[2].alt}
+                src={images[2]}
                 className="h-full w-full object-cover object-center"
               />
             </div>
           </div>
           <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
             <img
-              alt={product?.data.images[3].alt}
-              src={product?.data.images[3]}
+              alt={images[3].alt}
+              src={images[3]}
               className="h-full w-full object-cover object-center"
             />
           </div>
@@ -122,18 +120,16 @@ const ProductDetails = () => {
         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-300 lg:pr-8">
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              {product?.data.name}
+              {name}
             </h1>
           </div>
 
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
             <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">
-              ৳{product?.data.price}
-            </p>
+            <p className="text-3xl tracking-tight text-gray-900">৳{price}</p>
             <p className="text-md mt-2 tracking-tight text-gray-900">
-              Stock: {product?.data.stock}
+              Stock: {stock}
             </p>
 
             {/* Reviews */}
@@ -171,9 +167,7 @@ const ProductDetails = () => {
               <h3 className="sr-only">Description</h3>
 
               <div className="space-y-6">
-                <p className="text-base text-gray-900">
-                  {product?.data.description}
-                </p>
+                <p className="text-base text-gray-900">{description}</p>
               </div>
               <div className="flex items-center w-full mx-auto justify-start my-6">
                 <button
@@ -187,7 +181,7 @@ const ProductDetails = () => {
                 </button>
 
                 <p className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[98px] min-w-[80px] placeholder:text-gray-900 py-[14px] text-center bg-transparent">
-                  {cartProduct ? cartProduct.quantity : 0}
+                  {cartItem ? cartItem.quantity : 0}
                 </p>
                 <button
                   onClick={addToCartFunc}
