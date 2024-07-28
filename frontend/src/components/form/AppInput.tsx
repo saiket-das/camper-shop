@@ -33,7 +33,6 @@ const AppInput = ({
         render={({ field }) => (
           <input
             className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1  ring-gray-300 focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6"
-            // {...field}
             id={name}
             placeholder={placeholder}
             type={type}

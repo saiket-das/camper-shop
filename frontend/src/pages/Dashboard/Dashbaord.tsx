@@ -27,8 +27,10 @@ const Dashbaord = () => {
       image_3,
       image_4,
     } = data;
-    if (image_1 && image_2 & image_3 && image_4) {
+    if (image_1) {
       const imageFiles = [image_1, image_2, image_3, image_4];
+      console.log(imageFiles);
+
       try {
         const uploadPromises = Array.from(imageFiles).map((file) =>
           uploadToCloudinary(file)
