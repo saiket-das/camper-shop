@@ -2,6 +2,14 @@ import { baseApi } from "../../api/baseApi";
 
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    postProduct: builder.mutation({
+      query: (productData) => ({
+        url: "/product",
+        method: "POST",
+        body: productData,
+      }),
+    }),
+
     getAllProducts: builder.query({
       query: () => ({
         url: "/product",
@@ -20,4 +28,8 @@ const productApi = baseApi.injectEndpoints({
   overrideExisting: false, // To avoid overwriting existing endpoints
 });
 
-export const { useGetAllProductsQuery, useGetSingleProductQuery } = productApi;
+export const {
+  usePostProductMutation,
+  useGetAllProductsQuery,
+  useGetSingleProductQuery,
+} = productApi;

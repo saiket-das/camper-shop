@@ -1,4 +1,4 @@
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 type AppInputProps = {
   type: string;
@@ -15,6 +15,8 @@ const AppInput = ({
   placeholder,
   required = true,
 }: AppInputProps) => {
+  const { control } = useFormContext(); // Use useFormContext to get the control object
+
   return (
     <div>
       {label && (
@@ -27,14 +29,22 @@ const AppInput = ({
       )}
       <Controller
         name={name}
+        control={control}
         render={({ field }) => (
           <input
-            {...field}
+            className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1  ring-gray-300 focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6"
+            // {...field}
             id={name}
             placeholder={placeholder}
             type={type}
             required={required}
-            className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1  ring-gray-300 focus:ring-2 focus:ring-primary-600 sm:text-sm sm:leading-6"
+            onChange={(e) => {
+              if (type === "file") {
+                field.onChange(e.target.files[0]);
+              } else {
+                field.onChange(e.target.value);
+              }
+            }}
           />
         )}
       />
