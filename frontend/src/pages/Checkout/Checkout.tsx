@@ -17,7 +17,7 @@ const Checkout = () => {
   const cart = useAppSelector((state: RootState) => state.cart);
   const { items, totalAmount } = cart;
   const onSubmit = async (data: FieldValues) => {
-    const toastId = toast.loading("Loggin in");
+    const toastId = toast.loading("Loading..");
     try {
       const {
         firstName,
