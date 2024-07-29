@@ -39,7 +39,9 @@ const AppInput = ({
             required={required}
             onChange={(e) => {
               if (type === "file") {
-                field.onChange(e.target.files[0]);
+                if (e.target.files && e.target.files[0]) {
+                  field.onChange(e.target.files[0]);
+                }
               } else {
                 field.onChange(e.target.value);
               }

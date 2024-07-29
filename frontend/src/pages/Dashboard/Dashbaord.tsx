@@ -15,7 +15,7 @@ const Dashbaord = () => {
 
   const onSubmit = async (data: FieldValues) => {
     setLoading(true);
-    const toastId = toast.loading("Loadding...");
+    const toastId = toast.loading("Loading...");
     const {
       name,
       price,
