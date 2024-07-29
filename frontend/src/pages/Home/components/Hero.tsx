@@ -8,10 +8,13 @@ const Hero = () => {
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             Adventure awaits. Gear up now!{" "}
-            <a href="#" className="font-semibold text-primary">
+            <Link
+              to={AppRoutes.PRODUCTS}
+              className="font-semibold text-primary"
+            >
               <span aria-hidden="true" className="absolute inset-0" />
               Shop Now <span aria-hidden="true">&rarr;</span>
-            </a>
+            </Link>
           </div>
         </div>
         <div className="text-center">
